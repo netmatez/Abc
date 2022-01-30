@@ -71,9 +71,8 @@
         "size": 1,
         "records": [
           {
-            "value.message.TaxByTaxRules[0].TaxRate": "${$.consume_from_stagea.response.records[0].value.message.Data[0].Data.TaxByTaxRules[0].TaxRate}",
-            "value.message.TaxByTaxRules[0].Authorities": "${$.consume_from_stagea.response.records[0].value.message.Data[0].Data.TaxByTaxRules[0].Authorities}",
-            "value.message.TaxByTaxRules[0].Authorities": ["${$.consume_from_stagea.response.records[0].value.message.Data[0].Data.TaxByTaxRules[0].Authorities}"]
+            "value.message.TaxByTaxRules[0].TaxRate": "(int)${$.consume_from_stagea.response.records[0].value.message.Data[0].Data.TaxByTaxRules[0].TaxRate}",
+            "value.message.TaxByTaxRules[0].Authorities[0].AuthoritySequenceNo": "(int)${$.consume_from_stagea.response.records[0].value.message.Data[0].Data.TaxByTaxRules[0].Authorities[0].AuthoritySequenceNo}"
             }
         ]
       }

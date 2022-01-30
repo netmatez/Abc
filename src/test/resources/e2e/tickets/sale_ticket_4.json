@@ -7,14 +7,14 @@
       "operation": "produce",
       "request": {
         "async": true,
-        "recordType" : "JSON",
+        "recordType": "JSON",
         "file": "testdata/1b-ticket19555365_stagea_SingleLine_JSON.json"
       },
       "assertions": {
-        "status" : "Ok",
-        "recordMetadata" : {
-          "topicPartition" : {
-            "topic" : "stagea"
+        "status": "Ok",
+        "recordMetadata": {
+          "topicPartition": {
+            "topic": "stagea"
           }
         }
       }
@@ -25,14 +25,14 @@
       "operation": "produce",
       "request": {
         "async": true,
-        "recordType" : "JSON",
+        "recordType": "JSON",
         "file": "testdata/2b-ticket19555365_stageb_SingleLine_JSON.json"
       },
       "assertions": {
-        "status" : "Ok",
-        "recordMetadata" : {
-          "topicPartition" : {
-            "topic" : "stageb"
+        "status": "Ok",
+        "recordMetadata": {
+          "topicPartition": {
+            "topic": "stageb"
           }
         }
       }
@@ -44,7 +44,7 @@
       "request": {
         "consumerLocalConfigs": {
           "seek": "stagea,0,-1",
-          "recordType" : "JSON",
+          "recordType": "JSON",
           "commitSync": true,
           "showRecordsConsumed": true,
           "maxNoOfRetryPollsOrTimeouts": 5
@@ -61,18 +61,19 @@
       "request": {
         "consumerLocalConfigs": {
           "seek": "stageb,0,-1",
-          "recordType" : "JSON",
+          "recordType": "JSON",
           "commitSync": true,
           "showRecordsConsumed": true,
           "maxNoOfRetryPollsOrTimeouts": 5
         }
       },
-      "validators": [
-        {
-        "field" : "$.records[0].value.message.TaxByTaxRules[0].Authorities",
-        "value" : ["${$.consume_from_stagea.response.records[0].value.message.Data[0].Data.TaxByTaxRules[0].Authorities}"]
-        }
-      ]
+      "verify": {
+        "records": [
+          {
+            "value.message.TaxByTaxRules[0].Authorities[0].AuthoritySequenceNo": "(int)${$.consume_from_stagea.response.records[0].value.message.Data[0].Data.TaxByTaxRules[0].Authorities[0].AuthoritySequenceNo}"
+          }
+        ]
+      }
     },
     {
       "name": "consume_from_stageb1",
@@ -81,18 +82,19 @@
       "request": {
         "consumerLocalConfigs": {
           "seek": "stageb,0,-1",
-          "recordType" : "JSON",
+          "recordType": "JSON",
           "commitSync": true,
           "showRecordsConsumed": true,
           "maxNoOfRetryPollsOrTimeouts": 5
         }
       },
-      "validators": [
-        {
-          "field" : "$.records[0].value.message.TaxByTaxRules[0].Authorities",
-          "value" : "${$.consume_from_stagea.response.records[0].value.message.Data[0].Data.TaxByTaxRules[0].Authorities}"
-        }
-      ]
+      "verify": {
+        "records": [
+          {
+            "value.message.TaxByTaxRules[0].Authorities[0].AuthoritySequenceNo": "(int)${$.consume_from_stagea.response.records[0].value.message.Data[0].Data.TaxByTaxRules[0].Authorities[0].AuthoritySequenceNo}"
+          }
+        ]
+      }
     }
   ]
 }

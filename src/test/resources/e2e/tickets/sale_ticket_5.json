@@ -74,7 +74,7 @@
             //"value.message.Data[0].Data.Payments": "${$.consume_from_stagea.response.records[0].value.message.Payments}"
             //"value.message.Data[0].Data.Payments": ["${$.consume_from_stagea.response.records[0].value.message.Payments}"]
             //"value.message.Data[0].Data.Payments[0]": "${$.consume_from_stagea.response.records[0].value.message.Payments[0]}"
-            "value.message.Data[0].Data.Payments[0]": ["${$.consume_from_stagea.response.records[0].value.message.Payments[0]}"]
+            "value.message.Payments": "$CUSTOM.ASSERT:com.demo.utils.MyAsserts#asserted:{\"arr\":${$.consume_from_stagea.response.records[0].value.message.Data[0].Data.Payments}}"
           }
         ]
       }
