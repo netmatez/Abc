@@ -1,0 +1,106 @@
+{
+    "key": "38373837383",
+    "value": {
+        "version": "2.47.948",
+        "identity": {
+            "id": "eue8372kss-fkd8483-ke8e83",
+            "parentId": null,
+            "externalIds": {
+                "DeviceType": "45",
+                "TrackingId": "wujs73737-eusjs5253-oe948383"
+            }
+        },
+        "stream": "data-stagea",
+        "message": {
+            "Data": [
+                {
+                    "Data": {
+                        "SubTotalAmount": "25.30",
+                        "TaxAmount": "0.33",
+                        "TotalAmount": "25.30",
+			"TicketNumber": "19555365",
+                        "TaxByTaxRules": [
+                            {
+                                "RuleSequenceNo": 0,
+                                "TaxCategoryId": 45556,
+                                "TaxCategoryName": "Inclusive Tax",
+                                "TaxRate": 6,
+                                "RuleCode": "1",
+                                "TaxableQtyInStockingUnits": 1,
+                                "Authorities": [
+                                    {
+                                        "AuthoritySequenceNo": 0,
+                                        "AuthorityName": "Default"
+                                    }
+                                ],
+                                "IsInclusive": true
+                            }
+                        ],
+                        "Seats": [
+                            {
+                                "Number": 0
+                            }
+                        ],
+                        "LineItems": [
+                            {
+                                "Definition": {
+                                    "ItemNumber": "14",
+                                    "ShortDescription": "bbb",
+                                    "Description": ""
+                                },
+                                "LineType": 0,
+                                "OriginalQuantity": 0,
+                                "TotalCost": "0.00",
+                                "PriceListPrice": {
+                                    "Price": "10.00"
+                                },
+                                "ItemNumber": "14",
+                                "IsTaxable": true,
+                                "UnitPriceAmount": "10.00"
+                            },
+                            {
+                                "Definition": {
+                                    "ItemNumber": "17",
+                                    "ShortDescription": "ccc",
+                                    "Description": ""
+                                },
+                                "QuantitySold": "1.000000",
+                                "AppliedSub": [
+                                    {
+                                        "ParentQuantitySold": "1.000000",
+                                        "Definition": {
+                                            "ItemNumber": "19",
+                                            "ShortDescription": "zzzzz",
+                                            "Description": ""
+                                        }
+                                    }
+                                ],
+                                "IsUserEnteredPrice": false
+                            }
+                        ],
+                        "Payments": [
+                            {
+                                "SequenceNumber": 1,
+                                "Description": "Cash"
+                            }
+                        ],
+                        "strTicketType": "Ticket"
+                    },
+                    "DataType": 10,
+                    "SubmissionTrackingId": "4"
+                }
+            ],
+            "DataCounts": [
+                {
+                    "Count": 1,
+                    "DataType": 10
+                }
+            ],
+            "DeviceType": 9,
+            "CustomerId": "3837383"
+        },
+        "partitionKey": "3837383",
+        "key": null,
+        "messageId": "eyye6373-ndhd7373-dmjdd777"
+    }
+}

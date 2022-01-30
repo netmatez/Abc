@@ -1,0 +1,110 @@
+{
+  "scenarioName": "E2E - Verify a Sale ticket",
+  "steps": [
+
+    {
+      "name": "consume_from_stagea",
+      "url": "kafka-topic:stagea",
+      "operation": "consume",
+      "request": {
+        "consumerLocalConfigs": {
+          "seek": "stagea,0,-1",
+          "recordType" : "JSON",
+          "commitSync": true,
+          "showRecordsConsumed": true,
+          "maxNoOfRetryPollsOrTimeouts": 5
+        }
+      },
+      "assertions": {
+        "size": 1
+      }
+    },
+    {
+      "name": "consume_from_stageb",
+      "url": "kafka-topic:stageb",
+      "operation": "consume",
+      "ignoreStep" : false,
+      "request": {
+        "consumerLocalConfigs": {
+          "seek": "stageb,0,-1",
+          "recordType" : "JSON",
+          "commitSync": true,
+          "showRecordsConsumed": true,
+          "maxNoOfRetryPollsOrTimeouts": 5
+        }
+      },
+      "assertions": {
+        "size": 1,
+        "records": [
+          {
+            "value.identity.externalIds.CustomerId": "3837383",
+            "value.identity.externalIds.DeviceType": "${$.consume_from_stagea.response.records[0].value.identity.externalIds.DeviceType}",
+            "value.identity.externalIds.TicketNumber": "19555365",
+            "value.identity.externalIds.TicketNumber": "${$.consume_from_stagea.response.records[0].value.message.Data[0].Data.TicketNumber}"
+          }
+        ]
+      }
+    },
+    {
+      "name": "consume_from_stageb1",
+      "url": "kafka-topic:stageb",
+      "operation": "consume",
+      "ignoreStep" : false,
+      "request": {
+        "consumerLocalConfigs": {
+          "seek": "stageb,0,-1",
+          "recordType" : "JSON",
+          "commitSync": true,
+          "showRecordsConsumed": true,
+          "maxNoOfRetryPollsOrTimeouts": 5
+        }
+      },
+        "validators": [
+          {
+            "field" : "$.records[0].value.message.TaxByTaxRules",
+            "value" : "${$.consume_from_stagea.response.records[0].value.identity.externalIds.Version}"
+          }
+        ]
+    },
+    {
+      "name": "consume_from_stageb2",
+      "url": "kafka-topic:stageb",
+      "operation": "consume",
+      "ignoreStep" : true,
+      "request": {
+        "consumerLocalConfigs": {
+          "seek": "stageb,0,-1",
+          "recordType" : "JSON",
+          "commitSync": true,
+          "showRecordsConsumed": true,
+          "maxNoOfRetryPollsOrTimeouts": 5
+        }
+      },
+      "validators": [
+        {
+          "field" : "$.records[0].value.identity.externalIds.TicketNumber",
+          "value" : 19555365
+        }
+      ]
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

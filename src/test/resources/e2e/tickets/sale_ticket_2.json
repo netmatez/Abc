@@ -1,0 +1,82 @@
+{
+  "scenarioName": "E2E - Verify a Sale ticket",
+  "steps": [
+    {
+      "name": "produce_to_stagea",
+      "url": "kafka-topic:stagea",
+      "operation": "produce",
+      "request": {
+        "async": true,
+        "recordType" : "JSON",
+        "file": "testdata/1b-ticket19555365_stagea_SingleLine_JSON.json"
+      },
+      "assertions": {
+        "status" : "Ok",
+        "recordMetadata" : {
+          "topicPartition" : {
+            "topic" : "stagea"
+          }
+        }
+      }
+    },
+    {
+      "name": "produce_to_stageb",
+      "url": "kafka-topic:stageb",
+      "operation": "produce",
+      "request": {
+        "async": true,
+        "recordType" : "JSON",
+        "file": "testdata/2b-ticket19555365_stageb_SingleLine_JSON.json"
+      },
+      "assertions": {
+        "status" : "Ok",
+        "recordMetadata" : {
+          "topicPartition" : {
+            "topic" : "stageb"
+          }
+        }
+      }
+    },
+    {
+      "name": "consume_from_stagea",
+      "url": "kafka-topic:stagea",
+      "operation": "consume",
+      "request": {
+        "consumerLocalConfigs": {
+          "seek": "stagea,0,-1",
+          "recordType" : "JSON",
+          "commitSync": true,
+          "showRecordsConsumed": true,
+          "maxNoOfRetryPollsOrTimeouts": 5
+        }
+      },
+      "assertions": {
+        "size": 1
+      }
+    },
+    {
+      "name": "consume_from_stageb",
+      "url": "kafka-topic:stageb",
+      "operation": "consume",
+      "request": {
+        "consumerLocalConfigs": {
+          "seek": "stageb,0,-1",
+          "recordType" : "JSON",
+          "commitSync": true,
+          "showRecordsConsumed": true,
+          "maxNoOfRetryPollsOrTimeouts": 5
+        }
+      },
+      "assertions": {
+        "size": 1,
+        "records": [
+          {
+            "value.identity.externalIds.CustomerId": "3837383",
+            "value.identity.externalIds.DeviceType": "${$.consume_from_stagea.response.records[0].value.identity.externalIds.DeviceType}",
+            "value.identity.externalIds.TicketNumber": "${$.consume_from_stagea.response.records[0].value.message.Data[0].Data.TicketNumber}"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "scenarioName": "E2E - Produce to topic",
+  "steps": [
+    {
+      "name": "produce_to_stagea",
+      "url": "kafka-topic:stagea",
+      "operation": "produce",
+      "request": {
+        "async": true,
+        "recordType" : "JSON",
+        //"file": "testdata/1b-ticket19555365_stagea_SingleLine_JSON.json"
+        "records": [
+                    {
+                    "key": "11111111",
+                    "value": "aaaaaaa"
+                  },
+                    {
+                      "key" : "22222222",
+                      "value" : "${JSON.FILE:testdata/3a-ticket19555365_stagea_SingleLine_JSON_only_value.json}"
+                    }
+                ]
+      },
+      "assertions": {
+        "status" : "Ok",
+        "recordMetadata" : {
+          "topicPartition" : {
+            "topic" : "stagea"
+          }
+        }
+      }
+    }
+  ]
+}
