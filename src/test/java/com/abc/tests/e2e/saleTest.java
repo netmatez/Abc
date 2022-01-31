@@ -92,14 +92,14 @@ public class saleTest {
     // TestRun status - FAILED
     /*
 
-    there is some deserializataion error, I did not have time to dig in. Try looking at the logs to find out
+     If you want to use externilised json file, please define all the records in that file and reference it in scenario
      */
 
 
-//      @Test
-//    @Scenario("e2e/tickets/sale_ticket_7.json")
-//    public void E2EInputFileJson7Test() throws Exception {
-//    }
+      @Test
+    @Scenario("e2e/tickets/sale_ticket_7.json")
+    public void E2EInputFileJson7Test() throws Exception {
+    }
 
     // TC 7 - Produce, Consume & Verify
     // Testdata file - Fully formatted Pure JSON file & validated in JSON validators
@@ -115,9 +115,9 @@ public class saleTest {
         If you have just one record, for now you need to specify it on first line
 
      */
-    @Test
-    @Scenario("e2e/tickets/z_sale_ticket_pure_JSON.json")
-    public void E2EInputFileJsonTest() throws Exception {
-    }
+//    @Test
+//    @Scenario("e2e/tickets/z_sale_ticket_pure_JSON.json")
+//    public void E2EInputFileJsonTest() throws Exception {
+//    }
 
 }
